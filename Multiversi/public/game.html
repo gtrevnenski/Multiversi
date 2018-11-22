@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>MultiVERSI Game</title>
+    <script src="javascripts/client.js"></script>
+    <style>
+        html, body, section { height: 100%; width: 100%; margin: 0; overflow: auto; background-color: seagreen; }
+        .game-window{
+            float:left;
+            width: 100vh;
+            height: 100%;
+        }
+        .side-window{
+            float:left;
+            margin-left: 5;
+        }
+        table{
+            width: 100vh;
+            height: 100%;
+            background-color: green;
+        }
+        table, th, td {
+            border: 3px solid black;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }   
+        td {
+            padding: 15px;
+            width: 100%;
+        }
+        td.piece{
+            background-image: url("images/white.png");
+            background-size: 90%;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        td.rotate{
+            animation: spin 2s linear;
+            -o-animation: spin 2s linear;
+            -moz-animation: spin 2s linear;
+            -webkit-animation: spin 2s linear;
+       
+        }
+
+        .isBlack{
+            filter: invert(100%);
+        }
+
+        .blackAnim{
+            animation: spinToBlack 2s linear;
+        }
+
+        .isWhite{
+            filter: invert(0%);
+        }
+
+        .whiteAnim{
+            animation: spinToWhite 2s linear;
+        }
+
+        .white-count{
+            padding-left: 10%;
+            background-image: url("../res/white.png");
+            background-size: 100%;
+            width: 10vh;
+            height: 10vh;
+        }
+
+        @keyframes spinToBlack{
+            0%{ filter: invert(0%);} 
+            49%{ filter: invert(0%);} 
+            50%{ filter: invert(100%);} 
+            100% {transform: rotateY(180deg); filter: invert(100%);}
+        }
+
+          @keyframes spinToWhite{
+            0%{ filter: invert(100%);} 
+            49%{ filter: invert(100%);} 
+            50%{ filter: invert(0%);} 
+            100% {transform: rotateY(-180deg); filter: invert(0%);}
+        }
+    </style>
+</head>
+<body>
+    <!-- Section 1 --> 
+    <section>
+        <div class="game-window">
+            <table id="game-board" border="3px">
+                <tr>
+                    <td id="square1-1" class="piece"></td>
+                    <td id="square1-2"></td>
+                    <td id="square1-3"></td>
+                    <td id="square1-4"></td>
+                    <td id="square1-5"></td>
+                    <td id="square1-6" class="piece isBlack"></td>
+                    <td id="square1-7"></td>
+                    <td id="square1-8"></td>
+                </tr>
+                <tr>
+                    <td id="square2-1"></td>
+                    <td id="square2-2"></td>
+                    <td id="square2-3"></td>
+                    <td id="square2-4"></td>
+                    <td id="square2-5"></td>
+                    <td id="square2-6"></td>
+                    <td id="square2-7"></td>
+                    <td id="square2-8"></td>
+                </tr>
+                <tr>
+                    <td id="square3-1"></td>
+                    <td id="square3-2"></td>
+                    <td id="square3-3"></td>
+                    <td id="square3-4"></td>
+                    <td id="square3-5"></td>
+                    <td id="square3-6"></td>
+                    <td id="square3-7"></td>
+                    <td id="square3-8"></td>
+                </tr>
+                <tr>
+                    <td id="square4-1"></td>
+                    <td id="square4-2"></td>
+                    <td id="square4-3"></td>
+                    <td id="square4-4"></td>
+                    <td id="square4-5"></td>
+                    <td id="square4-6"></td>
+                    <td id="square4-7"></td>
+                    <td id="square4-8"></td>
+                </tr>
+                <tr>
+                    <td id="square5-1"></td>
+                    <td id="square5-2"></td>
+                    <td id="square5-3"></td>
+                    <td id="square5-4"></td>
+                    <td id="square5-5"></td>
+                    <td id="square5-6"></td>
+                    <td id="square5-7"></td>
+                    <td id="square5-8"></td>
+                </tr>
+                <tr>
+                    <td id="square6-1"></td>
+                    <td id="square6-2"></td>
+                    <td id="square6-3"></td>
+                    <td id="square6-4"></td>
+                    <td id="square6-5"></td>
+                    <td id="square6-6"></td>
+                    <td id="square6-7"></td>
+                    <td id="square6-8"></td>
+                </tr>
+                <tr>
+                    <td id="square7-1"></td>
+                    <td id="square7-2"></td>
+                    <td id="square7-3"></td>
+                    <td id="square7-4"></td>
+                    <td id="square7-5"></td>
+                    <td id="square7-6"></td>
+                    <td id="square7-7"></td>
+                    <td id="square7-8"></td>
+                </tr>
+                <tr>
+                    <td id="square8-1"></td>
+                    <td id="square8-2"></td>
+                    <td id="square8-3"></td>
+                    <td id="square8-4"></td>
+                    <td id="square8-5"></td>
+                    <td id="square8-6"></td>
+                    <td id="square8-7"></td>
+                    <td id="square8-8"></td>
+                </tr>
+            </table>
+        </div>
+        <!-- Section 2 -->
+        <div class="side-window">
+            <b style="font-size: 200%; float:right;padding-top:200%;">x10</b>
+            <img src="images/white.png" width="50%" height="50%" style="padding-left:20%; padding-top:20%;"/> 
+        </div>
+    </section>
+</body>
+</html>
