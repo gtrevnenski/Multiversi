@@ -19,16 +19,31 @@ const wss = new websocketModule.Server({ server });
 var currentGame = new Game(0);
 var currentGameId = 0;
 
+var activeGames = []; // Game[]
+
 wss.on("connection", function(ws){
 	currentGame.addPlayer(ws);
 		
 	if(currentGame.isFull()){
 		console.log("Starting game " + currentGameId);
-		//TODO: Start game
+
+		activeGames.push(currentGame);
+		currentGame.start();
 
 		currentGameId++;
 		currentGame = new Game(currentGameId);
 		console.log("Creating game " + currentGameId);
 	}
+
+	ws.on("message", function incoming(message) {
+		if(message.startsWith("move")){
+			//move:1-1
+			for(let game of activeGames){
+				if(game.hasPlayer(ws)){
+					game.makeMove(message.replace("move:",""));
+				}
+			}
+		}
+	});
 });
 server.listen(port);
