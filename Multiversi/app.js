@@ -18,8 +18,8 @@ var server = http.createServer(app);
 const wss = new websocketModule.Server({ server });
 var currentGame = new Game(0);
 var currentGameId = 0;
-
-var activeGames = []; // Game[]
+	
+var activeGames = []; // Game[] websockets
 
 wss.on("connection", function(ws){
 	currentGame.addPlayer(ws);
