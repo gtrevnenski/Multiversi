@@ -39,7 +39,7 @@ wss.on("connection", function(ws){
 		if(message.startsWith("move")){
 			//move:1-1
 			for(let game of activeGames){
-				if(game.hasPlayer(ws)){
+				if(game.hasPlayer(ws) && game.getActivePlayer() == ws){
 					game.makeMove(message.replace("move:",""));
 				}
 			}

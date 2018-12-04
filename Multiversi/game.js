@@ -76,18 +76,20 @@ game.prototype.getInactivePlayer = function(){
     }
     return this.playerB;
 }
-game.prototype.find  = function(piece){
+game.prototype.find  = function(x, y){
     for(p of this.pieces){
-        if(p.x===piece.x && p.y===piece.y){
+        if(p.x===x && p.y===y){
             return p;
         }
     }
     return null;
 }
 
-game.prototype.findFunction = function(currPiece, deltaX, deltaY){
-    var tempPiece = new Piece(this.getInactivePlayer(), currPiece.x + deltaX, currPiece.y + deltaY);
-    var foundPiece = this.find(tempPiece);
+game.prototype.findInDirection = function(currPiece, deltaX, deltaY){
+    var tempX =  currPiece.x + deltaX;
+    var tempY =  currPiece.y + deltaY;
+    var foundPiece = this.find(tempX, tempY);
+    var tempFoundArray = [];
 
     while(foundPiece!=null)
     {
@@ -95,14 +97,15 @@ game.prototype.findFunction = function(currPiece, deltaX, deltaY){
             if((foundPiece.x != (currPiece.x + deltaX)) || (foundPiece.y != (currPiece.y + deltaY))) //if the found piece is next to current piece the move is invalid
             {
                 this.isValid = true;
+                this.foundArray = this.foundArray.concat(tempFoundArray);
                 break;
             }else return;
         }
-        this.foundArray.push(foundPiece);
+        tempFoundArray.push(foundPiece);
 
-        tempPiece.x += deltaX;
-        tempPiece.y += deltaY;
-        foundPiece = this.find(tempPiece);
+        tempX += deltaX;
+        tempY += deltaY;
+        foundPiece = this.find(tempX, tempY);
     }
 }
 
@@ -126,18 +129,20 @@ game.prototype.makeMove = function(message){
     this.isValid = false;
     this.foundArray = [];
 
-    this.findFunction(currPiece,0,1); //Y - right
-    this.findFunction(currPiece,0,-1); //Y - left
-    this.findFunction(currPiece,1,0); //X - down
-    this.findFunction(currPiece,-1,0); //X - up
-    this.findFunction(currPiece,1,1); //Diagonal - down right
-    this.findFunction(currPiece,-1,-1); //Diagonal - up left
-    this.findFunction(currPiece,-1,1); //Diagonal - up right
-    this.findFunction(currPiece,1,-1); // Diagonal - down left
+    this.findInDirection(currPiece,0,1); //Y - right
+    this.findInDirection(currPiece,0,-1); //Y - left
+    this.findInDirection(currPiece,1,0); //X - down
+    this.findInDirection(currPiece,-1,0); //X - up
+    this.findInDirection(currPiece,1,1); //Diagonal - down right
+    this.findInDirection(currPiece,-1,-1); //Diagonal - up left
+    this.findInDirection(currPiece,-1,1); //Diagonal - up right
+    this.findInDirection(currPiece,1,-1); // Diagonal - down left
     this.foundArray.forEach(p => p.player=this.getActivePlayer());
     if(this.isValid){
-        this.playerA.send(JSON.stringify({type: "Turn valid",foundArray: this.foundArray}));
-        this.playerB.send(JSON.stringify(this.foundArray));
+        this.foundArray.push(currPiece);
+        this.pieces = this.pieces.concat(this.foundArray);
+        this.playerA.send(JSON.stringify({type: "Turn valid",flipArray: this.foundArray}));
+        this.playerB.send(JSON.stringify({type: "Turn valid",flipArray: this.foundArray}));
         this.turnFun();
     }
     else{
