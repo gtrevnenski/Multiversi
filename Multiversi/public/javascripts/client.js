@@ -1,4 +1,5 @@
-var clientSocket = new WebSocket("ws://145.94.158.108:3000");
+var clientSocket = new WebSocket("ws://145.94.159.105:3000");
+
 
 var player;
 var currTurn;
@@ -25,6 +26,8 @@ clientSocket.onmessage = function (event) {
         $("#gameTurn").text(((turn=="A")?"White's":"Black's") + " turn")
     }
     if(incomingMsg.type == "Turn valid"){
+        var moveSound = $("#sound")[0];
+        moveSound.play();
         for (let piece of incomingMsg.flipArray){
             let square = $("#square" + piece.x + "-" +piece.y);
             if(turn == "A"){
@@ -46,6 +49,15 @@ clientSocket.onmessage = function (event) {
               $(".white-count-text").text("x" + ($(".isWhite").length));
               $(".black-count-text").text("x" + ($(".isBlack").length));
         }
+    }
+    if(incomingMsg.type.endsWith("wins")){
+        var player = incomingMsg.type.split(" ")[1];
+        if(player == "A"){
+            $("#gameMsg").text("White player wins");
+        }
+        if(player == "B"){
+            $("#gameMsg").text("Black player wins");
+        } 
     }
 
     console.log(incomingMsg);

@@ -19,7 +19,7 @@ const wss = new websocketModule.Server({ server });
 var currentGame = new Game(0);
 var currentGameId = 0;
 	
-var activeGames = []; // Game[] websockets
+var activeGames = []; 
 
 wss.on("connection", function(ws){
 	currentGame.addPlayer(ws);
@@ -31,10 +31,10 @@ wss.on("connection", function(ws){
 		currentGame.start();
 
 		currentGameId++;
-		currentGame = new Game(currentGameId);
+		currentGame = new Game();
 		console.log("Creating game " + currentGameId);
 	}
-
+																	// close connection at the end
 	ws.on("message", function incoming(message) {
 		if(message.startsWith("move")){
 			//move:1-1
@@ -47,3 +47,8 @@ wss.on("connection", function(ws){
 	});
 });
 server.listen(port);
+module.exports.endGame = function(game){
+	var index = activeGames.indexOf(game);
+	activeGames.splice(index, 1);
+	currentGameId--;
+};

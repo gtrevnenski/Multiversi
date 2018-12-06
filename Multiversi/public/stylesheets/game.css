@@ -89,6 +89,14 @@ td.rotate{
     padding-right: 15%;
     font-size:200%; 
 }
+#gameMsg{
+    text-align: center;
+    font: 45px Helvetica, Arial, sans-serif;
+}
+#gameTurn{
+    text-align: center;
+    font: 40px Helvetica, Arial, sans-serif;
+}
 
 @keyframes spinToBlack{
     0%{ filter: invert(0%);} 
