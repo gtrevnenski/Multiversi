@@ -43,19 +43,12 @@ td.piece{
     background-position: center;
 }
 
-td.rotate{
-    animation: spin 2s linear;
-    -o-animation: spin 2s linear;
-    -moz-animation: spin 2s linear;
-    -webkit-animation: spin 2s linear;
-}
-
 .isBlack{
     filter: invert(100%);
 }
 
 .blackAnim{
-    animation: spinToBlack 2s linear;
+    animation: spinToBlack 0.5s linear;
 }
 
 .isWhite{
@@ -63,7 +56,7 @@ td.rotate{
 }
 
 .whiteAnim{
-    animation: spinToWhite 2s linear;
+    animation: spinToWhite 0.5s linear;
 }
 
 
