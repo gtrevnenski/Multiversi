@@ -1,4 +1,4 @@
-var clientSocket = new WebSocket("ws://145.94.159.105:3000");
+var clientSocket = new WebSocket("ws://145.94.156.63:3000");
 
 
 var player;
@@ -58,10 +58,17 @@ clientSocket.onmessage = function (event) {
         if(player == "B"){
             $("#gameMsg").text("Black player wins");
         } 
+        $("#gameTurn").text("");
+        $("#backLink").text("Back");
     }
-
+    if(incomingMsg.type.endsWith("win.")){
+        $("#gameTurn").text("");
+        $("#gameMsg").text(incomingMsg.type);
+        $("#backLink").text("Back");
+    }
     console.log(incomingMsg);
 }
+
 function clickEvent(piece){
     var id = piece.id.replace("square","");
     clientSocket.send("move:" + id);

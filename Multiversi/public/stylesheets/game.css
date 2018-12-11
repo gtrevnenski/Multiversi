@@ -97,6 +97,12 @@ td.rotate{
     text-align: center;
     font: 40px Helvetica, Arial, sans-serif;
 }
+#backDiv{
+    padding-left: 15vw;
+    padding-top: 10vh;
+    color: burlywood;
+    font-size: 300%;
+}
 
 @keyframes spinToBlack{
     0%{ filter: invert(0%);} 

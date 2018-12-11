@@ -11,13 +11,17 @@ var app = express();
 
 app.use(express.static(__dirname + "/public"));
 
+app.set('view engine', 'ejs')
 app.get("/play", indexRouter);
-app.get("/splash", indexRouter);
+app.get("/", function(req, res){
+	res.render('splash.ejs', {playersOnline: activeGames.length*2, gamesPlayed: gamesPlayed});
+});
 
 var server = http.createServer(app);
 const wss = new websocketModule.Server({ server });
 var currentGame = new Game(0);
 var currentGameId = 0;
+var gamesPlayed=0;
 	
 var activeGames = []; 
 
@@ -45,10 +49,29 @@ wss.on("connection", function(ws){
 			}
 		}
 	});
+	ws.on("close", function incoming(code){
+		if(code=="1001"){
+			for(let game of activeGames){
+				if(game.hasPlayer(ws)){
+					if(ws==game.playerA){
+						game.playerB.send(JSON.stringify({"type": "Opponent disconnected. You win."}));
+						endGame(game);
+					}
+					else{
+						game.playerA.send(JSON.stringify({"type": "Opponent disconnected. You win."}));
+						endGame(game);			
+						}
+				}
+			}
+		}
+	});
 });
-server.listen(port);
-module.exports.endGame = function(game){
+function endGame(game){
 	var index = activeGames.indexOf(game);
 	activeGames.splice(index, 1);
 	currentGameId--;
+	gamesPlayed++;
 };
+
+server.listen(port);
+module.exports.endGame = endGame;
