@@ -29,9 +29,10 @@ html, body, section { height: 100%; width: 100%; margin: 0; overflow: auto; marg
 }
 
 #howbtn:hover::after{
-
+    width: 20vw;
+    overflow: visible;
     position: absolute;
-    font-size: 27%;
+    font-size: 50%;
     border: dashed;
     padding: 5px;
     content: attr(data-instructions);

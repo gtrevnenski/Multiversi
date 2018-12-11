@@ -1,20 +1,40 @@
 var express = require('express');
 var http = require('http');
 var websocketModule = require('ws');
+var cookies = require('cookie-parser')
+var sessions = require('express-session')
+var credentials = require('./credentials');
+
 var Game = require('./game');
-
-
-var indexRouter = require('./routes/index');
 
 var port = process.argv[2];
 var app = express();
 
 app.use(express.static(__dirname + "/public"));
 
+app.use(cookies(credentials.cookieSecret));
+app.use(sessions(credentials.cookieSecret));
+
 app.set('view engine', 'ejs')
-app.get("/play", indexRouter);
+app.get("/play", function(req, res){
+	var session = req.session;
+
+	if(session.visits){
+		session.visits++;
+	}else{
+		session.visits = 1;
+	}
+
+	res.sendFile("game.html", {root: "./public"});
+});
 app.get("/", function(req, res){
-	res.render('splash.ejs', {playersOnline: activeGames.length*2, gamesPlayed: gamesPlayed});
+	var session = req.session;
+
+	if(!session.visits){
+		session.visits = 0;
+	}
+
+	res.render('splash.ejs', {playersOnline: activeGames.length*2, gamesPlayed: gamesPlayed, gamesPlayedByYou: session.visits});
 });
 
 var server = http.createServer(app);

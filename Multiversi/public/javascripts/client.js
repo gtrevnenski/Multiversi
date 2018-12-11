@@ -5,12 +5,12 @@ var gameModule = function(socketURL){
     var currTurn;
 
     clientSocket.onopen = function(){
-        
+        console.log("Connected to the server");
     }
 
     //When the server sends the player a message
     clientSocket.onmessage = function (event) {
-        console.log(event);
+        //console.log(event);
         let incomingMsg = JSON.parse(event.data);
 
         //Received after both players have connected
