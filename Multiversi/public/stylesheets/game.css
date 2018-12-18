@@ -64,6 +64,7 @@ td.piece{
     padding-left:10%; 
     padding-top:20%;
 }
+
 .white-count-text{
     float: right; 
     padding-top: 40%;
@@ -76,6 +77,7 @@ td.piece{
     padding-top:20%;
     filter: invert(100%)
 }
+
 .black-count-text{
     float: right; 
     padding-top: 40%;
@@ -85,16 +87,50 @@ td.piece{
 #gameMsg{
     text-align: center;
     font: 45px Helvetica, Arial, sans-serif;
+    color:white;
+    transition: color 1s ease-out;
 }
+
+#gameMsg:hover{
+    color: black;
+}
+
 #gameTurn{
     text-align: center;
     font: 40px Helvetica, Arial, sans-serif;
 }
 #backDiv{
-    padding-left: 15vw;
-    padding-top: 10vh;
+    margin-left: 15vw;
+    margin-top: 10vh;
     color: burlywood;
     font-size: 300%;
+}
+
+#funFact{
+    margin-left: 15vw;
+    margin-top: 10vh;
+    color: burlywood;
+    font-size: 300%;
+}
+
+#funFact:active::before{
+    width: 20vw;
+    overflow: visible;
+    position: relative;
+    font-size: 50%;
+    border: dashed;
+    padding: 5px;
+    content: "The world champion in Reversi is only 11 years old! Feeling old?    ";
+}
+
+#backDiv:hover::after{
+    width: 20vw;
+    overflow: visible;
+    position: absolute;
+    font-size: 50%;
+    border: dashed;
+    padding: 5px;
+    content: "Returns you to the splash screen, from where you can start another game."
 }
 
 @keyframes spinToBlack{

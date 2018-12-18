@@ -94,7 +94,7 @@ var gameModule = function(socketURL){
     }
 }
 
-var game = new gameModule("ws://145.94.198.213:3000/");
+var game = new gameModule("ws://145.94.229.29:3000/");
 
 function clickEvent(piece){
     var id = piece.id.replace("square","");

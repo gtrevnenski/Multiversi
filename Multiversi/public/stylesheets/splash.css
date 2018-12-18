@@ -14,8 +14,13 @@ html, body, section { height: 100%; width: 100%; margin: 0; overflow: auto; marg
     text-decoration: underline;
     font-weight: bold;
     font: 80px Helvetica, Arial, sans-serif;
-    
+    transition: color 0.5s ease;
 }
+
+#playbtn:hover{
+    color: darkred;
+}
+
 .credentials{
     font-style: italic;
     font: 20px Verdana, Geneva, sans-serif;
@@ -26,8 +31,12 @@ html, body, section { height: 100%; width: 100%; margin: 0; overflow: auto; marg
     color: red;
     font-style: italic;
     font: 80px Helvetica, Arial, sans-serif;
+    animation: flickerAnimation 1.5s linear infinite;
 }
-
+#howbtn:hover{
+    animation: none;
+    animation-play-state: paused;
+}
 #howbtn:hover::after{
     width: 20vw;
     overflow: visible;
@@ -37,8 +46,19 @@ html, body, section { height: 100%; width: 100%; margin: 0; overflow: auto; marg
     padding: 5px;
     content: attr(data-instructions);
 }
+a:active {
+    background-color: yellow;
+}
 
 .buttonsDiv{
+    position: relative;
     float: left;
     padding-top: 18vh;
-    padding-left: 15vw;}
+    padding-left: 15vw;
+}
+
+@keyframes flickerAnimation {
+    0%   { opacity:1; }
+    50%  { opacity:0; }
+    100% { opacity:1; }
+}
