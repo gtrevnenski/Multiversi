@@ -107,10 +107,10 @@ td.piece{
 }
 
 #funFact{
-    margin-left: 15vw;
+    margin-left: 18vw;
     margin-top: 10vh;
     color: burlywood;
-    font-size: 300%;
+    font-size: 220%;
 }
 
 #funFact:active::before{
@@ -133,8 +133,15 @@ td.piece{
     content: "Returns you to the splash screen, from where you can start another game."
 }
 
-table:fullscreen {
+:fullscreen #fs{
     background-color: seagreen;
+  }
+  #fs{
+    font-size: 100%;
+    background-color: burlywood;
+    position:absolute;
+    bottom:0;
+    right:0;
   }
 @media only screen and (max-width: 1366px) {
     section {

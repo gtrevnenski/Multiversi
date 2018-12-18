@@ -31,7 +31,7 @@ html, body, section { height: 100%; width: 100%; margin: 0; overflow: auto; marg
     color: red;
     font-style: italic;
     font: 80px Helvetica, Arial, sans-serif;
-    animation: flickerAnimation 1.5s linear infinite;
+    animation: flickerAnimation 1.5s linear 2;;
 }
 #howbtn:hover{
     animation: none;

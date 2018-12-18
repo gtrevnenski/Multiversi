@@ -102,5 +102,5 @@ function clickEvent(piece){
 }
 
 function toggleFS(btn){
-    document.getElementsByTagName("table")[0].requestFullscreen();
+    document.body.requestFullscreen();
 }

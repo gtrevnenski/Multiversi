@@ -201,18 +201,7 @@ game.prototype.makeMove = function(message){
         this.getActivePlayer().send(JSON.stringify({"type": "Turn invalid"}));
         return;
     }
-   /* var sameXPieces1 = pieces.filter(p => p.x==currPiece.x && p.y<currPiece.y);
-    var sameXPieces2 = pieces.filter(p => p.x==currPiece.x && p.y>currPiece.y);
 
-    var sameYPieces1 = pieces.filter(p => p.y==currPiece.y && p.x>currPiece.x);
-    var sameYPieces2 = pieces.filter(p => p.y==currPiece.y && p.x<currPiece.x);
-
-    var sameMainDiagonal1 = pieces.filter(p => p.x - p.y == currPiece.x - currPiece.y && p.x<currPiece.x);
-    var sameMainDiagonal2 = pieces.filter(p => p.x - p.y == currPiece.x - currPiece.y && p.x>currPiece.x);
-
-    var sameAntiDiagonal1 = pieces.filter(p => p.x + p.y == currPiece.x + currPiece.y && p.x<currPiece.x);
-    var sameAntiDiagonal2 = pieces.filter(p => p.x + p.y == currPiece.x + currPiece.y && p.x>currPiece.x);
-*/
     this.isValid = false;
     this.foundArray = [];
 
