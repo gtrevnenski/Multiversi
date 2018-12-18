@@ -133,6 +133,15 @@ td.piece{
     content: "Returns you to the splash screen, from where you can start another game."
 }
 
+table:fullscreen {
+    background-color: seagreen;
+  }
+@media only screen and (max-width: 1366px) {
+    section {
+      background-color: rgb(63, 1, 1);
+    }
+  }
+
 @keyframes spinToBlack{
     0%{ filter: invert(0%);} 
     49%{ filter: invert(0%);} 

@@ -94,9 +94,13 @@ var gameModule = function(socketURL){
     }
 }
 
-var game = new gameModule("ws://145.94.229.29:3000/");
+var game = new gameModule("ws://145.94.177.153:3000/");
 
 function clickEvent(piece){
     var id = piece.id.replace("square","");
     game.send("move:" + id);
+}
+
+function toggleFS(btn){
+    document.getElementsByTagName("table")[0].requestFullscreen();
 }

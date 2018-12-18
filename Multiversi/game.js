@@ -165,7 +165,7 @@ game.prototype.checkInDirection = function(currPiece, deltaX, deltaY){
         tempX += deltaX;
         tempY += deltaY;
         foundPiece = this.find(tempX, tempY);
-    }
+    } 
     return false;
 }
 game.prototype.findInDirection = function(currPiece, deltaX, deltaY){
